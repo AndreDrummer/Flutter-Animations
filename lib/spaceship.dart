@@ -7,16 +7,19 @@ class Spaceship extends StatefulWidget {
   _SpaceshipState createState() => _SpaceshipState();
 }
 
-class _SpaceshipState extends State<Spaceship>
-    with SingleTickerProviderStateMixin {
+class _SpaceshipState extends State<Spaceship> with TickerProviderStateMixin {
   final Image starsBackground =
       Image.asset('assets/stars.png', fit: BoxFit.fill);
 
   final Image ufo = Image.asset(
     'assets/spaceship.png',
   );
+  final Image et = Image.asset(
+    'assets/et.png',
+  );
 
   late AnimationController _animation;
+  late AnimationController _animation2;
 
   @override
   void initState() {
@@ -25,6 +28,11 @@ class _SpaceshipState extends State<Spaceship>
       duration: Duration(seconds: 5),
       vsync: this,
     )..repeat();
+
+    _animation2 = AnimationController(
+      duration: Duration(seconds: 5),
+      vsync: this,
+    );
   }
 
   @override
@@ -39,6 +47,11 @@ class _SpaceshipState extends State<Spaceship>
         AnimatedBuilder(
           animation: _animation,
           builder: (_, __) {
+            if (_animation.value > 0.9) {
+              print('Bingo!');
+              _animation.stop();
+              _animation2.repeat();
+            }
             return Container(
               child: BeamTransition(animation: _animation),
             );
@@ -50,6 +63,24 @@ class _SpaceshipState extends State<Spaceship>
             child: ufo,
           ),
           top: 10,
+        ),
+        Positioned(
+          child: AnimatedBuilder(
+            animation: _animation2,
+            child: et,
+            builder: (_, Widget? child) {
+              if (_animation2.value > 0.9) {
+                print('Bingo!');
+                _animation2.stop();
+              }
+              return AnimatedContainer(
+                duration: Duration(seconds: 2),
+                height: _animation.value * 130,
+                child: child,
+              );
+            },
+          ),
+          top: 285,
         )
       ],
     );
@@ -58,6 +89,7 @@ class _SpaceshipState extends State<Spaceship>
   @override
   void dispose() {
     _animation.dispose();
+    _animation2.dispose();
     super.dispose();
   }
 }
