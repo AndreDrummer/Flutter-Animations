@@ -1,6 +1,7 @@
 import 'package:animate/earth.dart';
 import 'package:animate/galaxy.dart';
 import 'package:animate/red_square.dart';
+import 'package:animate/spaceship.dart';
 import 'package:animate/sun.dart';
 import 'package:flutter/material.dart';
 
@@ -39,6 +40,7 @@ class _HomeState extends State<Home> {
       'Earth',
       'Sun',
       'Galaxy',
+      'Spaceship',
     ];
 
     Widget _getView(int index) {
@@ -49,8 +51,10 @@ class _HomeState extends State<Home> {
           return Earth();
         case 2:
           return Sun();
-        default:
+        case 3:
           return Galaxy();
+        default:
+          return Spaceship();
       }
     }
 
@@ -58,11 +62,11 @@ class _HomeState extends State<Home> {
       body: Column(
         children: [
           Container(
-            height: 460,
+            height: 400,
             child: _getView(index),
           ),
-          Container(
-            height: 132,
+          Expanded(
+            // height: 12,
             child: GridView(
               padding: EdgeInsets.zero,
               physics: NeverScrollableScrollPhysics(),
