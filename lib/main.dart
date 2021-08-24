@@ -1,10 +1,12 @@
-import 'package:animate/earth.dart';
-import 'package:animate/galaxy.dart';
-import 'package:animate/red_square.dart';
-import 'package:animate/spaceship.dart';
-import 'package:animate/sun.dart';
-import 'package:animate/text_animate.dart';
+import 'package:animate/animations/earth.dart';
+import 'package:animate/animations/galaxy.dart';
+import 'package:animate/animations/red_square.dart';
+import 'package:animate/animations/spaceship.dart';
+import 'package:animate/animations/sun.dart';
+import 'package:animate/animations/text_animate.dart';
 import 'package:flutter/material.dart';
+
+import 'animations/fade_in_animation.dart';
 
 void main() {
   runApp(MyApp());
@@ -36,13 +38,14 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    final screensTitle = [
+    final buttonTitles = [
       'Red Square',
       'Earth',
       'Sun',
       'Galaxy',
       'Spaceship',
-      'Text'
+      'Text',
+      'Fade In Animation'
     ];
 
     Widget _getView(int index) {
@@ -57,8 +60,10 @@ class _HomeState extends State<Home> {
           return Galaxy();
         case 4:
           return Spaceship();
-        default:
+        case 5:
           return AnimatedText();
+        default:
+          return FadeInAnimation();
       }
     }
 
@@ -73,21 +78,21 @@ class _HomeState extends State<Home> {
             // height: 12,
             child: GridView(
               padding: EdgeInsets.zero,
-              physics: NeverScrollableScrollPhysics(),
+              // physics: NeverScrollableScrollPhysics(),
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 childAspectRatio: 3,
                 crossAxisSpacing: 2,
                 mainAxisSpacing: 2,
               ),
-              children: screensTitle
+              children: buttonTitles
                   .map(
                     (e) => Container(
                       margin: const EdgeInsets.all(8.0),
                       child: ElevatedButton(
                         onPressed: () {
                           setState(() {
-                            index = screensTitle.indexOf(e);
+                            index = buttonTitles.indexOf(e);
                           });
                         },
                         child: Text(e),
