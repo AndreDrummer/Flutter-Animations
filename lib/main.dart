@@ -3,6 +3,7 @@ import 'package:animate/galaxy.dart';
 import 'package:animate/red_square.dart';
 import 'package:animate/spaceship.dart';
 import 'package:animate/sun.dart';
+import 'package:animate/text_animate.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -41,6 +42,7 @@ class _HomeState extends State<Home> {
       'Sun',
       'Galaxy',
       'Spaceship',
+      'Text'
     ];
 
     Widget _getView(int index) {
@@ -53,8 +55,10 @@ class _HomeState extends State<Home> {
           return Sun();
         case 3:
           return Galaxy();
-        default:
+        case 4:
           return Spaceship();
+        default:
+          return AnimatedText();
       }
     }
 
