@@ -7,6 +7,7 @@ import 'package:animate/animations/text_animate.dart';
 import 'package:flutter/material.dart';
 
 import 'animations/fade_in_animation.dart';
+import 'animations/flutter_logo.dart';
 
 void main() {
   runApp(MyApp());
@@ -45,7 +46,8 @@ class _HomeState extends State<Home> {
       'Galaxy',
       'Spaceship',
       'Text',
-      'Fade In Animation'
+      'Fade In Animation',
+      'Logo App'
     ];
 
     Widget _getView(int index) {
@@ -62,8 +64,10 @@ class _HomeState extends State<Home> {
           return Spaceship();
         case 5:
           return AnimatedText();
-        default:
+        case 6:
           return FadeInAnimation();
+        default:
+          return LogoApp();
       }
     }
 
